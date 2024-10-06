@@ -1,10 +1,9 @@
 package com.masterfulmc.mods.mr.event;
 
 import com.masterfulmc.mods.mr.datagen.PackEventHandler;
-import com.masterfulmc.mods.mr.material.ModBlockColor;
-import com.masterfulmc.mods.mr.material.ModBlockItemColor;
-import com.masterfulmc.mods.mr.material.forms.ore.registry.OreBlock;
 import com.masterfulmc.mods.mr.setup.MRegisters;
+import com.masterfulmc.mods.mr.setup.ModBlockColor;
+import com.masterfulmc.mods.mr.setup.ModItemColor;
 import com.masterfulmc.mods.mr.setup.loader.MaterialLoader;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -32,6 +31,6 @@ public class SetupEventHandler {
 
     @SubscribeEvent
     public static void onRegisterItemColors(final RegisterColorHandlersEvent.Item event) {
-        event.register(new ModBlockItemColor(), MRegisters.ITEMS.getEntries().stream().map(RegistryObject::get).toArray(Item[]::new));
+        event.register(new ModItemColor(), MRegisters.ITEMS.getEntries().stream().map(RegistryObject::get).toArray(Item[]::new));
     }
 }

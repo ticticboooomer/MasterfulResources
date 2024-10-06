@@ -10,7 +10,7 @@ public class OreBlock extends Block {
 
     public OreBlock(MaterialModel model) {
         super(Properties.of().destroyTime(5)
-                .explosionResistance(4)
+                .explosionResistance(5).requiresCorrectToolForDrops()
                 .sound(SoundType.STONE));
         this.model = model;
     }
