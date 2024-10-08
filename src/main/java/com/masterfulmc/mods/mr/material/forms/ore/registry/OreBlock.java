@@ -1,10 +1,11 @@
 package com.masterfulmc.mods.mr.material.forms.ore.registry;
 
+import com.masterfulmc.mods.mr.base.LayeredColored;
 import com.masterfulmc.mods.mr.material.MaterialModel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 
-public class OreBlock extends Block {
+public class OreBlock extends Block implements LayeredColored {
 
     private final MaterialModel model;
 
@@ -15,7 +16,11 @@ public class OreBlock extends Block {
         this.model = model;
     }
 
-    public int getColor() {
-        return model.color();
+    @Override
+    public int color(int layer) {
+        if (layer == 1) {
+            return model.color();
+        }
+        return 0xFFFFFF;
     }
 }

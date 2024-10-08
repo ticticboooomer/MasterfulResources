@@ -1,15 +1,15 @@
-package com.masterfulmc.mods.mr.material.forms.ore.registry;
+package com.masterfulmc.mods.mr.material.forms.ingot.registry;
 
 import com.masterfulmc.mods.mr.base.LayeredColored;
 import com.masterfulmc.mods.mr.material.MaterialModel;
 import net.minecraft.world.item.Item;
 
-public class RawOreItem extends Item implements LayeredColored {
+public class IngotItem extends Item  implements LayeredColored {
 
     private final MaterialModel model;
 
-    public RawOreItem(Properties p_41383_, MaterialModel model) {
-        super(p_41383_);
+    public IngotItem(MaterialModel model, Properties props) {
+        super(props);
         this.model = model;
     }
 

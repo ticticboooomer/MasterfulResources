@@ -12,4 +12,7 @@ public class NameUtil {
         return "raw_" + materialId.getPath();
     }
 
+    public static String nameIngotItem(ResourceLocation materialId) {
+        return materialId.getPath() + "_ingot";
+    }
 }

@@ -2,6 +2,7 @@ package com.masterfulmc.mods.mr.material.forms;
 
 import com.google.gson.JsonObject;
 import com.masterfulmc.mods.mr.Ref;
+import com.masterfulmc.mods.mr.material.forms.ingot.IngotMaterialFormType;
 import com.masterfulmc.mods.mr.material.forms.ore.OreMaterialFormType;
 import net.minecraft.resources.ResourceLocation;
 
@@ -13,6 +14,7 @@ public class MMaterialFormRegistry {
 
     public static void init() {
         register(Ref.MaterialFormTypes.ORE, new OreMaterialFormType());
+        register(Ref.MaterialFormTypes.INGOT, new IngotMaterialFormType());
     }
 
     public static MaterialFormType get(ResourceLocation id) {

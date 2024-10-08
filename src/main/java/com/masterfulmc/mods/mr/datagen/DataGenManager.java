@@ -47,7 +47,7 @@ public class DataGenManager {
         generator.addProvider(true, blockTagProvider);
         CompletableFuture<TagsProvider.TagLookup<Block>> blockTagLookup = blockTagProvider.contentsGetter();
         generator.addProvider(true, new MRItemTagsProvider(generator.getPackOutput(), lookupProvider, blockTagLookup, efh));
-
+        generator.addProvider(true, new MRRecipeProvider(generator.getPackOutput()));
 
         if (FMLEnvironment.dist != Dist.DEDICATED_SERVER) {
             generator.addProvider(true, new MRBlockModelProvider(generator.getPackOutput(), efh));
