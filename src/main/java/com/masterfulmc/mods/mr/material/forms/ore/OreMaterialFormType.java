@@ -21,7 +21,7 @@ public class OreMaterialFormType extends MaterialFormType {
             throw new RuntimeException("Error parsing material Json: [" + materialId + "]: Field [dropOverride] is onlyalloes to be used when field [dropType] has value of [gemlike]: found: [dropType=raw]");
         }
         else if (dropOverrideInJson) {
-            dropOverride = Optional.of(new ResourceLocation(json.get("dropOverride").toString()));
+            dropOverride = Optional.of(new ResourceLocation(json.get("dropOverride").getAsString()));
         }
         return new OreMaterialForm(dropType, dropOverride);
     }

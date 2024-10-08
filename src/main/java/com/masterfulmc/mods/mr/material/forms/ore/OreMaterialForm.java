@@ -22,8 +22,10 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
@@ -65,20 +67,33 @@ public class OreMaterialForm implements IMaterialForm {
     @Override
     public void generateItemModels(MaterialModel materialModel, MRItemModelProvider provider) {
         provider.getBuilder(oreBlock.getId().toString()).parent(new ModelFile.UncheckedModelFile(Ref.id("block/" + oreBlock.getId().getPath())));
-        provider.getBuilder(rawItem.getId().toString())
-                .parent(new ModelFile.UncheckedModelFile(new ResourceLocation("item/generated")))
-                .texture("layer0", Ref.Textures.RAW_ORE_ITEM);
+        var dropItemModel = provider.getBuilder(rawItem.getId().toString())
+                .parent(new ModelFile.UncheckedModelFile(new ResourceLocation("item/generated")));
+
+        if (dropType.equals("raw")) {
+            dropItemModel.texture("layer0", Ref.Textures.RAW_ORE_ITEM);
+        } else {
+            dropItemModel.texture("layer0", Ref.Textures.ORE_GEM_ITEM);
+        }
     }
 
     @Override
     public void generateLanguage(MaterialModel materialModel, MRLanguageProvider provider) {
         provider.add(oreBlock.get(), materialModel.name() + " Ore");
-        provider.add(rawItem.get(), "Raw " + materialModel.name());
+        if (dropType.equals("raw")) {
+            provider.add(rawItem.get(), "Raw " + materialModel.name());
+        } else {
+            provider.add(rawItem.get(), materialModel.name());
+        }
     }
 
     @Override
     public void generateLootTables(MaterialModel materialModel, BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
         LootPool.Builder pool = LootPool.lootPool().setRolls(ConstantValue.exactly(1f)).add(LootItem.lootTableItem(rawItem.get()));
+        if (dropOverride.isPresent()) {
+            pool = LootPool.lootPool().setRolls(ConstantValue.exactly(1f)).add(LootItem.lootTableItem(
+                    Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(dropOverride.get()))));
+        }
         consumer.accept(Ref.id("blocks/" + oreBlock.getId().getPath()), LootTable.lootTable().withPool(pool));
     }
 
