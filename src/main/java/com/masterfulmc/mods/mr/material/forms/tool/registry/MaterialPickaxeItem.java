@@ -7,12 +7,18 @@ import net.minecraft.world.item.Tier;
 
 public class MaterialPickaxeItem extends PickaxeItem implements LayeredColored {
 
+    private final MaterialModel model;
+
     public MaterialPickaxeItem(Tier tier, Properties props, MaterialModel model) {
         super(tier, 0, 0, props);
+        this.model = model;
     }
 
     @Override
     public int color(int layer) {
-        return 0;
+        if (layer == 1) {
+            return model.color();
+        }
+        return 0xFFFFFF;
     }
 }

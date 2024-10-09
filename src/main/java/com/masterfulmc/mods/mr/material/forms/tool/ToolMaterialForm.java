@@ -27,14 +27,15 @@ public class ToolMaterialForm implements IMaterialForm {
 
     @Override
     public void registerItems(MaterialModel model) {
-        toolItem = MRegisters.ITEMS.register(model.id() + toolType.getIdSuffix(), () -> toolType.createItem(tier, model));
+        toolItem = MRegisters.ITEMS.register(model.id().getPath() + toolType.getIdSuffix(), () -> toolType.createItem(tier, model));
     }
 
     @Override
     public void generateItemModels(MaterialModel materialModel, MRItemModelProvider provider) {
         provider.getBuilder(toolItem.getId().getPath())
                 .parent(DataGenCommons.ITEM_GENERATED)
-                .texture();
+                .texture("layer0", toolType.getHandleTexture())
+                .texture("layer1", toolType.getHeadTexture());
     }
 
     @Override

@@ -16,6 +16,9 @@ public class MaterialAxeItem extends AxeItem implements LayeredColored {
 
     @Override
     public int color(int layer) {
-        return 0;
+        if (layer == 1) {
+            return model.color();
+        }
+        return 0xFFFFFF;
     }
 }

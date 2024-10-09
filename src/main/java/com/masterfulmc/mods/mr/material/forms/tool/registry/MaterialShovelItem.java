@@ -17,6 +17,9 @@ public class MaterialShovelItem extends ShovelItem implements LayeredColored {
 
     @Override
     public int color(int layer) {
-        throw new NotImplementedException();
+        if (layer == 1) {
+            return model.color();
+        }
+        return 0xFFFFFF;
     }
 }

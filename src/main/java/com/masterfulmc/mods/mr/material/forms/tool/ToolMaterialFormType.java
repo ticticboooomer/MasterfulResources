@@ -22,6 +22,7 @@ public class ToolMaterialFormType extends MaterialFormType {
         var enchantmentValue = json.get("enchantmentValue").getAsInt();
         var repairMaterial = ResourceLocation.tryParse(json.get("repairMaterial").getAsString());
 
-        return new ToolMaterialForm();
+        var tier = new MaterialToolTier(uses, speed, attackDamage, level, enchantmentValue, repairMaterial);
+        return new ToolMaterialForm(tier, type);
     }
 }
